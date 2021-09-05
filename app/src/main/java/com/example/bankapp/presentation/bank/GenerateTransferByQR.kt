@@ -90,6 +90,7 @@ class GenerateTransferByQR : AppCompatActivity() {
                     val decodedByte =
                         BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
                     qr.setImageBitmap(decodedByte)
+                    create.visibility = View.GONE
                 } catch (e: Exception) {
                     println("Error $e")
                 }
