@@ -10,34 +10,36 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatSpinner
 import com.example.bankapp.R
-import com.example.bankapp.contants.ViewRouterParams
-import com.example.bankapp.presentation.home.viewModels.TransferToViewModel
+import com.example.bankapp.presentation.home.viewModels.TransferToNotEnrolledAccountViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class TransferTo : AppCompatActivity() {
+class TransferToNoEnrolledAccount : AppCompatActivity() {
+
 
     private lateinit var accounts: AppCompatSpinner
+    private lateinit var accountDestinationLayout: TextInputLayout
     private lateinit var accountDestination: TextInputEditText
     private lateinit var amountLayout: TextInputLayout
     private lateinit var currency: AppCompatSpinner
     private lateinit var amount: TextInputEditText
     private lateinit var loading: ProgressBar
     private lateinit var transfer: Button
-    private val model: TransferToViewModel by viewModels()
+    private lateinit var accountTypes: AppCompatSpinner
+
+    private val model: TransferToNotEnrolledAccountViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_transfer_to)
+        setContentView(R.layout.activity_transfer_to_no_enrolled_account)
         setUpViewReference()
         setUpViewActions()
         listenViewModelUpdates()
-
-        val enrolledAccountId = intent.extras!!.getString(ViewRouterParams.ENROLLED_ACCOUNT_ID)!!
-        model.onCreate(enrolledAccountId)
+        model.onCreate()
     }
 
     private fun setUpViewReference() {
+        accountDestinationLayout = findViewById(R.id.accountDestinationLayout)
         accountDestination = findViewById(R.id.accountDestination)
         accounts = findViewById(R.id.accountOrigins)
         currency = findViewById(R.id.currency)
@@ -45,6 +47,7 @@ class TransferTo : AppCompatActivity() {
         amount = findViewById(R.id.amount)
         loading = findViewById(R.id.loading)
         transfer = findViewById(R.id.transfer)
+        accountTypes = findViewById(R.id.accountTypes)
 
         val adapter = ArrayAdapter(
             this,
@@ -53,6 +56,15 @@ class TransferTo : AppCompatActivity() {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         currency.adapter = adapter
+
+        val accountTypesAdapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.account_types,
+            android.R.layout.simple_spinner_dropdown_item
+        )
+        accountTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        accountTypes.adapter = accountTypesAdapter
     }
 
     private fun setUpViewActions() {
@@ -61,15 +73,28 @@ class TransferTo : AppCompatActivity() {
                 amount.text.toString(),
                 currency.selectedItem.toString(),
                 accounts.selectedItem.toString(),
+                accountNumber = accountDestination.text.toString(),
+                accountType = accountTypes.selectedItem.toString()
             )
         }
     }
 
     private fun listenViewModelUpdates() {
-        model.enrolledAccount.observe(this, {
-            if (it != null) {
-                accountDestination.setText(it.accountNumber)
+        model.model.observe(this, {
+            if (it.isValidNumber) {
+                accountDestinationLayout.error = null
+            } else {
+                accountDestinationLayout.error = it.errorMessageNumber
             }
+
+            if (it.isValidAmount) {
+                amountLayout.error = null
+            } else {
+                amountLayout.error = it.errorMessageAmount
+            }
+
+            loading.visibility = if (it.isLoading) View.VISIBLE else View.GONE
+            transfer.isEnabled = !it.isLoading
         })
 
         model.accounts.observe(this, {
@@ -78,24 +103,12 @@ class TransferTo : AppCompatActivity() {
             accounts.adapter = adapter
         })
 
-        model.errorMessageAmount.observe(this, {
-            if (it.isNotBlank()) {
-                amountLayout.error = it
-            } else {
-                amountLayout.error = null
-            }
-        })
-
         model.errorMessage.observe(this, {
             if (it.isNotBlank()) {
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }
         })
 
-        model.isLoading.observe(this, {
-            loading.visibility = if (it) View.VISIBLE else View.GONE
-            transfer.isEnabled = !it
-        })
 
         model.onSuccess.observe(this, {
             if (it) {

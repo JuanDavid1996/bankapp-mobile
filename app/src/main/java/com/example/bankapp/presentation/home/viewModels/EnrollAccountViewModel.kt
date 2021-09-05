@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 class EnrollAccountViewModel : ViewModel() {
     val repository: EnrollAccountRepository = EnrollAccountRepository()
 
-    val model: MutableLiveData<RegisterAccountForm> by lazy {
-        MutableLiveData<RegisterAccountForm>(RegisterAccountForm())
+    val model: MutableLiveData<EnrollAccountForm> by lazy {
+        MutableLiveData<EnrollAccountForm>(EnrollAccountForm())
     }
 
     val enrolledAccountSuccess: MutableLiveData<Boolean> by lazy {
@@ -25,8 +25,8 @@ class EnrollAccountViewModel : ViewModel() {
         MutableLiveData<String>("")
     }
 
-    private fun validateEnrollAccountForm(number: String, name: String): RegisterAccountForm {
-        val newFormState = RegisterAccountForm()
+    private fun validateEnrollAccountForm(number: String, name: String): EnrollAccountForm {
+        val newFormState = EnrollAccountForm()
         if (number.length < 11) {
             newFormState.isValidNumber = false
             newFormState.errorMessageNumber = "Número de cuenta no válido"

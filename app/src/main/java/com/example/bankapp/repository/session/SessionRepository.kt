@@ -1,5 +1,6 @@
 package com.example.bankapp.repository.session
 
+import com.example.bankapp.repository.common.cloudstorage.SafeRequest
 import com.example.bankapp.repository.common.localstorage.SetUpDb.Companion.db
 import com.example.bankapp.repository.session.models.SignInResponse
 import kotlinx.coroutines.Dispatchers
@@ -36,35 +37,37 @@ class SessionRepository {
 
     suspend fun doSignIn(username: String, password: String): Result<SignInResponse?> {
         return withContext(Dispatchers.IO) {
-            val call = provider.doSignIn(username, password)
-            val response = call.body()
-            if (call.isSuccessful) {
-                if (response?.success!!) {
-                    val user = response.data!!.user
+            return@withContext SafeRequest.safeRequest {
+                val call = provider.doSignIn(username, password)
+                val response = call.body()
+                if (call.isSuccessful) {
+                    if (response?.success!!) {
+                        val user = response.data!!.user
 
-                    db.sessionDao().insert(
-                        Session(
-                            token = response.data!!.token!!,
-                            userId = user._id
+                        db.sessionDao().insert(
+                            Session(
+                                token = response.data!!.token!!,
+                                userId = user._id
+                            )
                         )
-                    )
 
-                    db.userDao().insert(
-                        User(
-                            _id = user._id,
-                            identification = user.identification,
-                            username = user.username,
-                            firstName = user.firstName,
-                            lastName = user.lastName,
+                        db.userDao().insert(
+                            User(
+                                _id = user._id,
+                                identification = user.identification,
+                                username = user.username,
+                                firstName = user.firstName,
+                                lastName = user.lastName,
+                            )
                         )
-                    )
 
-                    return@withContext Result.Success(response)
-                } else {
-                    return@withContext Result.Error(Exception(if (response.errors.isNotEmpty()) response.errors[0] else "Request fail"))
+                        return@safeRequest Result.Success(response)
+                    } else {
+                        return@safeRequest Result.Error(Exception(if (response.errors.isNotEmpty()) response.errors[0] else "Request fail"))
+                    }
                 }
+                return@safeRequest Result.Error(Exception("Request fail"))
             }
-            return@withContext Result.Error(Exception("Request fail"))
         }
     }
 
@@ -76,18 +79,21 @@ class SessionRepository {
         password: String
     ): Result<SignUpResponse?> {
         return withContext(Dispatchers.IO) {
-            val call = provider.doSignUp(firstName, lastName, identification, username, password)
-            val response = call.body()
-            if (call.isSuccessful) {
-                println("OK SUCCESS 200")
-                if (response?.success!!) {
-                    println("OK PASO POR AQUÍ?")
-                    return@withContext Result.Success(response)
-                } else {
-                    return@withContext Result.Error(Exception(if (response.errors.isNotEmpty()) response.errors[0] else "Request fail"))
+            return@withContext SafeRequest.safeRequest {
+                val call =
+                    provider.doSignUp(firstName, lastName, identification, username, password)
+                val response = call.body()
+                if (call.isSuccessful) {
+                    println("OK SUCCESS 200")
+                    if (response?.success!!) {
+                        println("OK PASO POR AQUÍ?")
+                        return@safeRequest Result.Success(response)
+                    } else {
+                        return@safeRequest Result.Error(Exception(if (response.errors.isNotEmpty()) response.errors[0] else "Request fail"))
+                    }
                 }
+                return@safeRequest Result.Error(Exception("Request fail"))
             }
-            return@withContext Result.Error(Exception("Request fail"))
         }
     }
 }

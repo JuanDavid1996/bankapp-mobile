@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.bankapp.R
 import com.example.bankapp.contants.ViewRouterParams
+import com.example.bankapp.presentation.home.TransferToNoEnrolledAccount
 import com.example.bankapp.presentation.home.EnrollAccountActivity
 import com.example.bankapp.presentation.home.EnrolledAccountsAccountActivity
 import com.example.bankapp.presentation.home.viewModels.TransfersViewModel
@@ -49,7 +50,7 @@ class TransfersFragment : Fragment() {
 
     private fun setUpViewActions() {
         registeredAccount.setOnClickListener { toEnrolledAccounts(true) }
-        noRegisteredAccount.setOnClickListener {}
+        noRegisteredAccount.setOnClickListener { toTransferToNotEnrolledAccount() }
         registerAccount.setOnClickListener { toEnrollAccount() }
         enrolledAccounts.setOnClickListener { toEnrolledAccounts() }
     }
@@ -61,6 +62,11 @@ class TransfersFragment : Fragment() {
     private fun toEnrolledAccounts(isTransfer: Boolean = false) {
         val intent = Intent(activity, EnrolledAccountsAccountActivity::class.java)
         intent.putExtra(ViewRouterParams.IS_TRANSFER, isTransfer)
+        startActivity(intent)
+    }
+
+    private fun toTransferToNotEnrolledAccount() {
+        val intent = Intent(activity, TransferToNoEnrolledAccount::class.java)
         startActivity(intent)
     }
 }

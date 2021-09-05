@@ -3,6 +3,7 @@ package com.example.bankapp.repository.bank
 import com.example.bankapp.repository.bank.cloudstorage.EnrolledProvider
 import com.example.bankapp.repository.bank.models.EnrolledAccount
 import com.example.bankapp.repository.bank.models.EnrolledAccountResponse
+import com.example.bankapp.repository.common.cloudstorage.SafeRequest
 import com.example.bankapp.repository.common.localstorage.SetUpDb.Companion.db
 import com.example.bankapp.repository.common.models.Result
 import com.example.bankapp.repository.session.SessionRepository
@@ -38,18 +39,20 @@ class EnrolledAccountRepository {
 
     private suspend fun getEnrolledAccountsFromCloud(): Result<List<EnrolledAccount>> {
         return withContext(Dispatchers.IO) {
-            val session = sessionRepository.getSession()
-            val call = provider.getEnrolledAccounts(session)
-            if (call.isSuccessful) {
-                val response = call.body()
-                if (response?.success == true) {
-                    val enrolledAccounts = response.data!!
-                    return@withContext Result.Success(enrolledAccounts)
-                } else {
-                    return@withContext Result.Error(Exception(response!!.errors[0]))
+            return@withContext SafeRequest.safeRequest {
+                val session = sessionRepository.getSession()
+                val call = provider.getEnrolledAccounts(session)
+                if (call.isSuccessful) {
+                    val response = call.body()
+                    if (response?.success == true) {
+                        val enrolledAccounts = response.data!!
+                        return@safeRequest Result.Success(enrolledAccounts)
+                    } else {
+                        return@safeRequest Result.Error(Exception(response!!.errors[0]))
+                    }
                 }
+                return@safeRequest Result.Error(Exception("Request fail"))
             }
-            return@withContext Result.Error(Exception("Request fail"))
         }
     }
 

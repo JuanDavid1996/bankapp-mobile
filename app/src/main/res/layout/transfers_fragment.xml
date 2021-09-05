@@ -39,7 +39,7 @@
         android:layout_marginTop="12dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:text="Cuenta no inscrita"
+        android:text="A cuenta no inscrita"
         android:textSize="18sp"
         android:textStyle="bold" />
 

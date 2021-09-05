@@ -15,6 +15,9 @@
         android:theme="@style/Theme.BankApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.home.TransferToNoEnrolledAccount"
+            android:exported="true" />
+        <activity
             android:name=".presentation.home.TransferTo"
             android:exported="true" />
         <activity

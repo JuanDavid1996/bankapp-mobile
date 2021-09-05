@@ -1,6 +1,6 @@
 package com.example.bankapp.presentation.home.viewModels
 
-class RegisterAccountForm {
+class EnrollAccountForm {
     var isValidNumber = false
     var errorMessageNumber = ""
     var isValidName = false

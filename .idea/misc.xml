@@ -6,6 +6,7 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.13802083333333334" />
         <entry key="app/src/main/res/layout/account_item.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/accounts_fragment.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_enroll_account.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/activity_register_account.xml" value="0.3697916666666667" />
@@ -13,6 +14,7 @@
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.67" />
         <entry key="app/src/main/res/layout/activity_tranfer_to_enrolled_account.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/activity_transfer_to.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_transfer_to_no_enrolled_account.xml" value="0.3546875" />
         <entry key="app/src/main/res/layout/enrolled_account_item.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/profile_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/transfers_fragment.xml" value="0.5" />
