@@ -15,6 +15,9 @@
         android:theme="@style/Theme.BankApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.bank.GenerateTransferByQR"
+            android:exported="true" />
+        <activity
             android:name=".presentation.bank.TransferToNoEnrolledAccount"
             android:exported="true" />
         <activity

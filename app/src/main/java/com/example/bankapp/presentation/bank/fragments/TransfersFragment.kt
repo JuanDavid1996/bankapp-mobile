@@ -13,6 +13,7 @@ import com.example.bankapp.contants.ViewRouterParams
 import com.example.bankapp.presentation.bank.TransferToNoEnrolledAccount
 import com.example.bankapp.presentation.bank.EnrollAccountActivity
 import com.example.bankapp.presentation.bank.EnrolledAccountsAccountActivity
+import com.example.bankapp.presentation.bank.GenerateTransferByQR
 import com.example.bankapp.presentation.bank.viewModels.TransfersViewModel
 
 class TransfersFragment : Fragment() {
@@ -26,6 +27,8 @@ class TransfersFragment : Fragment() {
     private lateinit var noRegisteredAccount: TextView
     private lateinit var registerAccount: TextView
     private lateinit var enrolledAccounts: TextView
+    private lateinit var receive: TextView
+    private lateinit var generate: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +49,8 @@ class TransfersFragment : Fragment() {
         noRegisteredAccount = view.findViewById(R.id.noRegisteredAccount)
         registerAccount = view.findViewById(R.id.registerAccount)
         enrolledAccounts = view.findViewById(R.id.enrolledAccounts)
+        receive = view.findViewById(R.id.receive)
+        generate = view.findViewById(R.id.generate)
     }
 
     private fun setUpViewActions() {
@@ -53,6 +58,7 @@ class TransfersFragment : Fragment() {
         noRegisteredAccount.setOnClickListener { toTransferToNotEnrolledAccount() }
         registerAccount.setOnClickListener { toEnrollAccount() }
         enrolledAccounts.setOnClickListener { toEnrolledAccounts() }
+        receive.setOnClickListener { toGenerateQR() }
     }
 
     private fun toEnrollAccount() {
@@ -68,5 +74,9 @@ class TransfersFragment : Fragment() {
     private fun toTransferToNotEnrolledAccount() {
         val intent = Intent(activity, TransferToNoEnrolledAccount::class.java)
         startActivity(intent)
+    }
+
+    private fun toGenerateQR() {
+        startActivity(Intent(activity, GenerateTransferByQR::class.java))
     }
 }
