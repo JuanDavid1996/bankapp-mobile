@@ -3,6 +3,7 @@ package com.example.bankapp.repository.bank
 import com.example.bankapp.repository.bank.cloudstorage.EnrollProvider
 import com.example.bankapp.repository.bank.models.EnrollAccountResponse
 import com.example.bankapp.repository.bank.models.EnrolledAccount
+import com.example.bankapp.repository.common.cloudstorage.NormalizeError
 import com.example.bankapp.repository.common.cloudstorage.SafeRequest
 import com.example.bankapp.repository.common.localstorage.SetUpDb.Companion.db
 import com.example.bankapp.repository.common.models.Result
@@ -19,21 +20,19 @@ class EnrollAccountRepository {
         name: String,
         accountType: String
     ): Result<EnrollAccountResponse> {
-        return withContext(Dispatchers.IO) {
-            return@withContext SafeRequest.safeRequest {
-                val session = sessionRepository.getSession()
-                val call = provider.enrollAccount(session, accountNumber, name, accountType)
-                if (call.isSuccessful) {
-                    val response = call.body();
-                    if (response?.success == true) {
-                        saveEnrolledAccountInLocalStorage(response.data!!)
-                        return@safeRequest Result.Success(response)
-                    } else {
-                        return@safeRequest Result.Error(Exception(response!!.errors[0]))
-                    }
+        return SafeRequest.safeRequest {
+            val session = sessionRepository.getSession()
+            val call = provider.enrollAccount(session, accountNumber, name, accountType)
+            if (call.isSuccessful) {
+                val response = call.body()
+                if (response?.success!!) {
+                    saveEnrolledAccountInLocalStorage(response.data!!)
+                    return@safeRequest Result.Success(response)
+                } else {
+                    return@safeRequest NormalizeError.safeError(response.errors)
                 }
-                return@safeRequest Result.Error(Exception("Request fail"))
             }
+            return@safeRequest Result.Error(Exception("Request fail"))
         }
     }
 

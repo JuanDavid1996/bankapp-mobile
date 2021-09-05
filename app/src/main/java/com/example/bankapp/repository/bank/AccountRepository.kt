@@ -38,20 +38,18 @@ class AccountRepository {
     }
 
     private suspend fun getAccountsFromCloud(): Result<List<Account>> {
-        return withContext(Dispatchers.IO) {
-            return@withContext SafeRequest.safeRequest {
-                val session = sessionRepository.getSession();
-                val call = provider.getAccounts(session)
-                val response = call.body()
-                if (call.isSuccessful) {
-                    if (response?.success == true) {
-                        return@safeRequest Result.Success(response.data!!)
-                    } else {
-                        return@safeRequest Result.Error(Exception(response!!.errors[0]))
-                    }
+        return SafeRequest.safeRequest {
+            val session = sessionRepository.getSession();
+            val call = provider.getAccounts(session)
+            val response = call.body()
+            if (call.isSuccessful) {
+                if (response?.success == true) {
+                    return@safeRequest Result.Success(response.data!!)
+                } else {
+                    return@safeRequest Result.Error(Exception(response!!.errors[0]))
                 }
-                return@safeRequest Result.Error(Exception("Failed to fetch"))
             }
+            return@safeRequest Result.Error(Exception("Failed to fetch"))
         }
     }
 

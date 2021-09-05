@@ -2,12 +2,10 @@ package com.example.bankapp.repository.bank
 
 import com.example.bankapp.repository.bank.cloudstorage.TransferProvider
 import com.example.bankapp.repository.bank.models.TransferResponse
+import com.example.bankapp.repository.common.cloudstorage.NormalizeError
 import com.example.bankapp.repository.common.cloudstorage.SafeRequest
 import com.example.bankapp.repository.common.models.Result
 import com.example.bankapp.repository.session.SessionRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.lang.Exception
 
 class TransferRepository {
     val sessionRepository = SessionRepository()
@@ -20,31 +18,25 @@ class TransferRepository {
         accountDestinationType: String,
         accountOriginId: String
     ): Result<TransferResponse> {
-        return withContext(Dispatchers.IO) {
-            return@withContext SafeRequest.safeRequest {
-                val session = sessionRepository.getSession()
-                val call = provider.transfer(
-                    session,
-                    amount,
-                    currency,
-                    accountDestinationNumber,
-                    accountDestinationType,
-                    accountOriginId
-                )
-                println("REQUEST FINISHED")
-                if (call.isSuccessful) {
-                    val response = call.body()
-                    println("REQUEST OK!")
-                    println("RESPONSE ${response?.success}!")
-                    if (response?.success == true) {
-                        return@safeRequest Result.Success(response)
-                    } else {
-                        println("ERRORS")
-                        return@safeRequest Result.Error(Exception(response!!.errors[0]))
-                    }
+        return SafeRequest.safeRequest {
+            val session = sessionRepository.getSession()
+            val call = provider.transfer(
+                session,
+                amount,
+                currency,
+                accountDestinationNumber,
+                accountDestinationType,
+                accountOriginId
+            )
+            if (call.isSuccessful) {
+                val response = call.body()
+                if (response?.success!!) {
+                    return@safeRequest Result.Success(response)
+                } else {
+                    return@safeRequest NormalizeError.safeError(response.errors)
                 }
-                return@safeRequest Result.Error(Exception("Request fail"))
             }
+            return@safeRequest Result.Error(Exception("Request fail"))
         }
     }
 }

@@ -7,10 +7,10 @@ import java.lang.Exception
 
 class SafeRequest {
     companion object {
-        suspend fun <T> safeRequest(request: suspend (() -> Result<T>)): Result<T> {
+        suspend fun <T> safeRequest(cb: suspend (() -> Result<T>)): Result<T> {
             return withContext(Dispatchers.IO) {
                 try {
-                    return@withContext request()
+                    return@withContext cb()
                 } catch (e: Exception) {
                     return@withContext Result.Error(Exception("No podemos comunicarnos con el servidor, por favor intenta más tarde"))
                 }

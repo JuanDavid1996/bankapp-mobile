@@ -1,5 +1,6 @@
 package com.example.bankapp.repository.session
 
+import com.example.bankapp.repository.common.cloudstorage.NormalizeError
 import com.example.bankapp.repository.common.cloudstorage.SafeRequest
 import com.example.bankapp.repository.common.localstorage.SetUpDb.Companion.db
 import com.example.bankapp.repository.session.models.SignInResponse
@@ -30,44 +31,42 @@ class SessionRepository {
 
     suspend fun logOut() {
         return withContext(Dispatchers.IO) {
-            db.clearAllTables();
+            db.clearAllTables()
             return@withContext
         }
     }
 
     suspend fun doSignIn(username: String, password: String): Result<SignInResponse?> {
-        return withContext(Dispatchers.IO) {
-            return@withContext SafeRequest.safeRequest {
-                val call = provider.doSignIn(username, password)
-                val response = call.body()
-                if (call.isSuccessful) {
-                    if (response?.success!!) {
-                        val user = response.data!!.user
+        return SafeRequest.safeRequest {
+            val call = provider.doSignIn(username, password)
+            val response = call.body()
+            if (call.isSuccessful) {
+                if (response?.success!!) {
+                    val user = response.data!!.user
 
-                        db.sessionDao().insert(
-                            Session(
-                                token = response.data!!.token!!,
-                                userId = user._id
-                            )
+                    db.sessionDao().insert(
+                        Session(
+                            token = response.data!!.token!!,
+                            userId = user._id
                         )
+                    )
 
-                        db.userDao().insert(
-                            User(
-                                _id = user._id,
-                                identification = user.identification,
-                                username = user.username,
-                                firstName = user.firstName,
-                                lastName = user.lastName,
-                            )
+                    db.userDao().insert(
+                        User(
+                            _id = user._id,
+                            identification = user.identification,
+                            username = user.username,
+                            firstName = user.firstName,
+                            lastName = user.lastName,
                         )
+                    )
 
-                        return@safeRequest Result.Success(response)
-                    } else {
-                        return@safeRequest Result.Error(Exception(if (response.errors.isNotEmpty()) response.errors[0] else "Request fail"))
-                    }
+                    return@safeRequest Result.Success(response)
+                } else {
+                    return@safeRequest NormalizeError.safeError(response.errors)
                 }
-                return@safeRequest Result.Error(Exception("Request fail"))
             }
+            return@safeRequest Result.Error(Exception("Request fail"))
         }
     }
 
@@ -78,22 +77,18 @@ class SessionRepository {
         username: String,
         password: String
     ): Result<SignUpResponse?> {
-        return withContext(Dispatchers.IO) {
-            return@withContext SafeRequest.safeRequest {
-                val call =
-                    provider.doSignUp(firstName, lastName, identification, username, password)
-                val response = call.body()
-                if (call.isSuccessful) {
-                    println("OK SUCCESS 200")
-                    if (response?.success!!) {
-                        println("OK PASO POR AQUÍ?")
-                        return@safeRequest Result.Success(response)
-                    } else {
-                        return@safeRequest Result.Error(Exception(if (response.errors.isNotEmpty()) response.errors[0] else "Request fail"))
-                    }
+        return SafeRequest.safeRequest {
+            val call =
+                provider.doSignUp(firstName, lastName, identification, username, password)
+            val response = call.body()
+            if (call.isSuccessful) {
+                if (response?.success!!) {
+                    return@safeRequest Result.Success(response)
+                } else {
+                    return@safeRequest NormalizeError.safeError(response.errors)
                 }
-                return@safeRequest Result.Error(Exception("Request fail"))
             }
+            return@safeRequest Result.Error(Exception("Request fail"))
         }
     }
 }
