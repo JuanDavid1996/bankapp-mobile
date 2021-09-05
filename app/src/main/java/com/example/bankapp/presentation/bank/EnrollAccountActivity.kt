@@ -1,4 +1,4 @@
-package com.example.bankapp.presentation.home
+package com.example.bankapp.presentation.bank
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.AppCompatSpinner
 import com.example.bankapp.R
-import com.example.bankapp.presentation.home.viewModels.EnrollAccountViewModel
+import com.example.bankapp.presentation.bank.viewModels.EnrollAccountViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 

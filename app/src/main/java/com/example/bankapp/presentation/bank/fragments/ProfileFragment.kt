@@ -1,4 +1,4 @@
-package com.example.bankapp.presentation.home.fragments
+package com.example.bankapp.presentation.bank.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.bankapp.R
-import com.example.bankapp.presentation.home.viewModels.ProfileViewModel
+import com.example.bankapp.presentation.bank.viewModels.ProfileViewModel
 import com.example.bankapp.presentation.session.SignInActivity
 
 class ProfileFragment : Fragment() {

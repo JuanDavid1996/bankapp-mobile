@@ -1,98 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
-    android:orientation="vertical"
-    tools:context=".presentation.home.fragments.TransfersFragment">
+    tools:context=".presentation.bank.fragments.TransfersFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enviar dinero"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:layout_margin="8dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/registeredAccount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:text="A cuenta inscrita"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enviar dinero"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="8dp"
-        android:background="#dedede" />
+        <TextView
+            android:id="@+id/registeredAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="A cuenta inscrita"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/noRegisteredAccount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:text="A cuenta no inscrita"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="8dp"
+            android:background="#dedede" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="6dp"
-        android:background="#dedede" />
+        <TextView
+            android:id="@+id/noRegisteredAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="A cuenta no inscrita"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Gestionar cuentas"
-        android:textSize="22sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/registerAccount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:text="Registar cuenta"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="8dp"
-        android:background="#dedede" />
-
-    <TextView
-        android:id="@+id/enrolledAccounts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:text="Cuentas inscritas"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="8dp"
-        android:background="#dedede" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:background="#dedede" />
 
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Gestionar cuentas"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/registerAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="Registrar cuenta"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="8dp"
+            android:background="#dedede" />
+
+        <TextView
+            android:id="@+id/enrolledAccounts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="Cuentas inscritas"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="8dp"
+            android:background="#dedede" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Transferencia por QR"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/receive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="Recibir"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="8dp"
+            android:background="#dedede" />
+
+        <TextView
+            android:id="@+id/generate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="Enviar"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="8dp"
+            android:background="#dedede" />
+
+
+    </LinearLayout>
+
+</ScrollView>

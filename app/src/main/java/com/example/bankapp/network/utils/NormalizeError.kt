@@ -1,6 +1,6 @@
-package com.example.bankapp.repository.common.cloudstorage
+package com.example.bankapp.network.utils
 
-import com.example.bankapp.repository.common.models.Result
+import com.example.bankapp.network.models.Result
 
 import java.lang.Exception
 

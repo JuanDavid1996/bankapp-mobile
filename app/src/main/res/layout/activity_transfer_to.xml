@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
-    tools:context=".presentation.home.TransferTo">
+    tools:context=".presentation.bank.TransferTo">
 
     <TextView
         android:id="@+id/labelDestination"

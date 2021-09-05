@@ -38,6 +38,6 @@ open class AppProvider {
 
         }
 
-        return retrofit!!;
+        return retrofit!!
     }
 }

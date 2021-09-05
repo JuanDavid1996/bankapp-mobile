@@ -1,4 +1,4 @@
-package com.example.bankapp.presentation.home.fragments
+package com.example.bankapp.presentation.bank.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.bankapp.R
-import com.example.bankapp.presentation.home.adapters.AccountAdapter
-import com.example.bankapp.presentation.home.viewModels.AccountsViewModel
+import com.example.bankapp.presentation.bank.adapters.AccountAdapter
+import com.example.bankapp.presentation.bank.viewModels.AccountsViewModel
 import com.example.bankapp.repository.bank.models.Account
 
 class AccountsFragment : Fragment() {

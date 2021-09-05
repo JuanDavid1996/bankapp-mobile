@@ -1,13 +1,13 @@
-package com.example.bankapp.presentation.home
+package com.example.bankapp.presentation.bank
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bankapp.R
-import com.example.bankapp.presentation.home.fragments.AccountsFragment
-import com.example.bankapp.presentation.home.fragments.ProfileFragment
-import com.example.bankapp.presentation.home.fragments.TransfersFragment
-import com.example.bankapp.presentation.home.viewModels.HomeViewModel
+import com.example.bankapp.presentation.bank.fragments.AccountsFragment
+import com.example.bankapp.presentation.bank.fragments.ProfileFragment
+import com.example.bankapp.presentation.bank.fragments.TransfersFragment
+import com.example.bankapp.presentation.bank.viewModels.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.bankapp.presentation.home.viewModels
+package com.example.bankapp.presentation.bank.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,7 @@ import com.example.bankapp.contants.ModelConstants.Companion.CURRENT
 import com.example.bankapp.contants.ModelConstants.Companion.SAVING
 import com.example.bankapp.contants.ModelConstants.Companion.SAVING_ES
 import com.example.bankapp.repository.bank.EnrollAccountRepository
-import com.example.bankapp.repository.common.models.Result
+import com.example.bankapp.network.models.Result
 import kotlinx.coroutines.launch
 
 class EnrollAccountViewModel : ViewModel() {

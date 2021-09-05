@@ -3,8 +3,7 @@ package com.example.bankapp.presentation
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Looper
-import com.example.bankapp.presentation.home.HomeActivity
+import com.example.bankapp.presentation.bank.HomeActivity
 import com.example.bankapp.presentation.session.SignInActivity
 import com.example.bankapp.repository.session.SessionRepository
 import kotlinx.coroutines.runBlocking

@@ -3,7 +3,7 @@ package com.example.bankapp.presentation.session.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bankapp.repository.common.models.Result
+import com.example.bankapp.network.models.Result
 import com.example.bankapp.repository.session.SessionRepository
 import com.example.bankapp.repository.session.models.SignInResponse
 import kotlinx.coroutines.launch

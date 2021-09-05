@@ -1,4 +1,4 @@
-package com.example.bankapp.presentation.home.fragments
+package com.example.bankapp.presentation.bank.fragments
 
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
@@ -10,10 +10,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.bankapp.R
 import com.example.bankapp.contants.ViewRouterParams
-import com.example.bankapp.presentation.home.TransferToNoEnrolledAccount
-import com.example.bankapp.presentation.home.EnrollAccountActivity
-import com.example.bankapp.presentation.home.EnrolledAccountsAccountActivity
-import com.example.bankapp.presentation.home.viewModels.TransfersViewModel
+import com.example.bankapp.presentation.bank.TransferToNoEnrolledAccount
+import com.example.bankapp.presentation.bank.EnrollAccountActivity
+import com.example.bankapp.presentation.bank.EnrolledAccountsAccountActivity
+import com.example.bankapp.presentation.bank.viewModels.TransfersViewModel
 
 class TransfersFragment : Fragment() {
 

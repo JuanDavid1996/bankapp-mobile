@@ -1,4 +1,4 @@
-package com.example.bankapp.presentation.home.viewModels
+package com.example.bankapp.presentation.bank.viewModels
 
 class TransferToNoEnEnrolledAccountForm {
     var isValidNumber = false

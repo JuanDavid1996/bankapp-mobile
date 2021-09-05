@@ -15,16 +15,16 @@
         android:theme="@style/Theme.BankApp"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".presentation.home.TransferToNoEnrolledAccount"
+            android:name=".presentation.bank.TransferToNoEnrolledAccount"
             android:exported="true" />
         <activity
-            android:name=".presentation.home.TransferTo"
+            android:name=".presentation.bank.TransferTo"
             android:exported="true" />
         <activity
-            android:name=".presentation.home.EnrolledAccountsAccountActivity"
+            android:name=".presentation.bank.EnrolledAccountsAccountActivity"
             android:exported="true" />
         <activity
-            android:name=".presentation.home.EnrollAccountActivity"
+            android:name=".presentation.bank.EnrollAccountActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.MainActivity"
@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.home.HomeActivity"
+            android:name=".presentation.bank.HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home" />
         <activity

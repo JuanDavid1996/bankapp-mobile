@@ -1,4 +1,4 @@
-package com.example.bankapp.presentation.home.adapters
+package com.example.bankapp.presentation.bank.adapters
 
 import android.content.Context
 import android.graphics.drawable.ColorDrawable

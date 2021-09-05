@@ -2,9 +2,9 @@ package com.example.bankapp.repository.bank
 
 import com.example.bankapp.repository.bank.cloudstorage.TransferProvider
 import com.example.bankapp.repository.bank.models.TransferResponse
-import com.example.bankapp.repository.common.cloudstorage.NormalizeError
-import com.example.bankapp.repository.common.cloudstorage.SafeRequest
-import com.example.bankapp.repository.common.models.Result
+import com.example.bankapp.network.utils.NormalizeError
+import com.example.bankapp.network.utils.SafeRequest
+import com.example.bankapp.network.models.Result
 import com.example.bankapp.repository.session.SessionRepository
 
 class TransferRepository {

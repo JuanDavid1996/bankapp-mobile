@@ -1,13 +1,13 @@
 package com.example.bankapp.repository.session
 
-import com.example.bankapp.repository.common.cloudstorage.NormalizeError
-import com.example.bankapp.repository.common.cloudstorage.SafeRequest
+import com.example.bankapp.network.utils.NormalizeError
+import com.example.bankapp.network.utils.SafeRequest
 import com.example.bankapp.repository.common.localstorage.SetUpDb.Companion.db
 import com.example.bankapp.repository.session.models.SignInResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
-import com.example.bankapp.repository.common.models.Result
+import com.example.bankapp.network.models.Result
 import com.example.bankapp.repository.session.cloudstorage.SessionProvider
 import com.example.bankapp.repository.session.models.Session
 import com.example.bankapp.repository.session.models.SignUpResponse

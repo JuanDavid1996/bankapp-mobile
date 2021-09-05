@@ -1,4 +1,4 @@
-package com.example.bankapp.presentation.home.viewModels
+package com.example.bankapp.presentation.bank.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,7 @@ import com.example.bankapp.contants.ModelConstants
 import com.example.bankapp.repository.bank.AccountRepository
 import com.example.bankapp.repository.bank.TransferRepository
 import com.example.bankapp.repository.bank.models.Account
-import com.example.bankapp.repository.common.models.Result
+import com.example.bankapp.network.models.Result
 import kotlinx.coroutines.launch
 
 class TransferToNotEnrolledAccountViewModel : ViewModel() {

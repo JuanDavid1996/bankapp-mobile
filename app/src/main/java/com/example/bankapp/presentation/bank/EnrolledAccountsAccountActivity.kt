@@ -1,4 +1,4 @@
-package com.example.bankapp.presentation.home
+package com.example.bankapp.presentation.bank
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.bankapp.R
 import com.example.bankapp.contants.ViewRouterParams
-import com.example.bankapp.presentation.home.adapters.EnrolledAccountAdapter
-import com.example.bankapp.presentation.home.viewModels.EnrolledAccountsViewModel
+import com.example.bankapp.presentation.bank.adapters.EnrolledAccountAdapter
+import com.example.bankapp.presentation.bank.viewModels.EnrolledAccountsViewModel
 import com.example.bankapp.repository.bank.models.EnrolledAccount
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlin.properties.Delegates

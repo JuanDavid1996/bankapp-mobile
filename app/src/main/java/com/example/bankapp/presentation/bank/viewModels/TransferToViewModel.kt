@@ -1,4 +1,4 @@
-package com.example.bankapp.presentation.home.viewModels
+package com.example.bankapp.presentation.bank.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +8,7 @@ import com.example.bankapp.repository.bank.EnrolledAccountRepository
 import com.example.bankapp.repository.bank.TransferRepository
 import com.example.bankapp.repository.bank.models.Account
 import com.example.bankapp.repository.bank.models.EnrolledAccount
-import com.example.bankapp.repository.common.models.Result
+import com.example.bankapp.network.models.Result
 import kotlinx.coroutines.launch
 
 class TransferToViewModel : ViewModel() {

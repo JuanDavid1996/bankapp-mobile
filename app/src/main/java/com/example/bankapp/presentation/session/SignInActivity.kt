@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bankapp.R
-import com.example.bankapp.presentation.home.HomeActivity
+import com.example.bankapp.presentation.bank.HomeActivity
 import com.example.bankapp.presentation.session.viewModels.SignInViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout

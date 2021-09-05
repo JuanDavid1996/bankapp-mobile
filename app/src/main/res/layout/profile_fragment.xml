@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
-    tools:context=".presentation.home.fragments.ProfileFragment">
+    tools:context=".presentation.bank.fragments.ProfileFragment">
 
     <TextView
         android:layout_width="match_parent"

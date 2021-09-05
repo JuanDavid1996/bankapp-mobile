@@ -1,4 +1,4 @@
-package com.example.bankapp.repository.common.models
+package com.example.bankapp.network.models
 
 sealed class Result<out R> {
     data class Success<out T>(val data: T) : Result<T>()
