@@ -1,31 +1,50 @@
 package com.example.bankapp.repository.bank
 
-import com.example.bankapp.repository.bank.cloudstorage.EnrollProvider
-import com.example.bankapp.repository.bank.models.EnrollAccountResponse
+import com.example.bankapp.repository.bank.cloudstorage.EnrolledProvider
 import com.example.bankapp.repository.bank.models.EnrolledAccount
+import com.example.bankapp.repository.bank.models.EnrolledAccountResponse
 import com.example.bankapp.repository.common.localstorage.SetUpDb.Companion.db
 import com.example.bankapp.repository.common.models.Result
 import com.example.bankapp.repository.session.SessionRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 
 class EnrolledAccountRepository {
-    private val provider = EnrollProvider()
+    private val provider = EnrolledProvider()
     private val sessionRepository = SessionRepository()
 
-    suspend fun enrollAccount(
-        accountNumber: String,
-        name: String,
-        accountType: String
-    ): Result<EnrollAccountResponse> {
+    suspend fun getEnrolledAccounts(refresh: Boolean): Result<EnrolledAccountResponse> {
+        return withContext(Dispatchers.IO) {
+            var enrolledAccounts = db.enrolledAccountDao().getEnrolledAccount()
+            if (enrolledAccounts.isEmpty() || refresh) {
+                val result = getEnrolledAccountsFromCloud()
+                if (result is Result.Success) {
+                    enrolledAccounts = result.data
+                    forceSaveEnrolledAccountInLocalStorage(enrolledAccounts)
+                } else if (result is Result.Error) {
+                    return@withContext result
+                }
+            }
+            return@withContext Result.Success(
+                EnrolledAccountResponse(
+                    success = true,
+                    data = enrolledAccounts,
+                    errors = emptyList()
+                )
+            )
+        }
+    }
+
+    private suspend fun getEnrolledAccountsFromCloud(): Result<List<EnrolledAccount>> {
         return withContext(Dispatchers.IO) {
             val session = sessionRepository.getSession()
-            val call = provider.enrollAccount(session, accountNumber, name, accountType)
+            val call = provider.getEnrolledAccounts(session)
             if (call.isSuccessful) {
-                val response = call.body();
+                val response = call.body()
                 if (response?.success == true) {
-                    saveEnrolledAccountInLocalStorage(response.data!!)
-                    return@withContext Result.Success(response)
+                    val enrolledAccounts = response.data!!
+                    return@withContext Result.Success(enrolledAccounts)
                 } else {
                     return@withContext Result.Error(Exception(response!!.errors[0]))
                 }
@@ -34,9 +53,33 @@ class EnrolledAccountRepository {
         }
     }
 
-    private suspend fun saveEnrolledAccountInLocalStorage(enrolledAccount: EnrolledAccount) {
+    private suspend fun forceSaveEnrolledAccountInLocalStorage(enrolledAccounts: List<EnrolledAccount>) {
+        withContext(Dispatchers.IO) {
+            removeEnrolledAccountsInLocalStorage()
+            saveEnrolledAccountsInLocalStorage(enrolledAccounts)
+        }
+    }
+
+    private suspend fun removeEnrolledAccountsInLocalStorage() {
+        withContext(Dispatchers.IO) {
+            val enrolledAccounts = db.enrolledAccountDao().getEnrolledAccount()
+            if (enrolledAccounts.isNotEmpty()) enrolledAccounts.forEach {
+                db.enrolledAccountDao().delete(it)
+            }
+        }
+    }
+
+    private suspend fun saveEnrolledAccountsInLocalStorage(enrolledAccounts: List<EnrolledAccount>) {
+        withContext(Dispatchers.IO) {
+            enrolledAccounts.forEach {
+                db.enrolledAccountDao().insert(it)
+            }
+        }
+    }
+
+    suspend fun getEnrolledAccountById(enrolledAccountId: String): EnrolledAccount {
         return withContext(Dispatchers.IO) {
-            db.enrolledAccountDao().insert(enrolledAccount)
+            return@withContext db.enrolledAccountDao().findById(enrolledAccountId)
         }
     }
 }

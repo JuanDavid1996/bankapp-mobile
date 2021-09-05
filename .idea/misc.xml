@@ -11,6 +11,9 @@
         <entry key="app/src/main/res/layout/activity_register_account.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/activity_tranfer_to_enrolled_account.xml" value="0.3697916666666667" />
+        <entry key="app/src/main/res/layout/activity_transfer_to.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/enrolled_account_item.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/profile_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/transfers_fragment.xml" value="0.5" />
         <entry key="app/src/main/res/menu/account_types.xml" value="0.3697916666666667" />

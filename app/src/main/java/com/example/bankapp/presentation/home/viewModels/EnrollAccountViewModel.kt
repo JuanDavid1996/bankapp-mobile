@@ -6,12 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.bankapp.contants.ModelConstants.Companion.CURRENT
 import com.example.bankapp.contants.ModelConstants.Companion.SAVING
 import com.example.bankapp.contants.ModelConstants.Companion.SAVING_ES
-import com.example.bankapp.repository.bank.EnrolledAccountRepository
+import com.example.bankapp.repository.bank.EnrollAccountRepository
 import com.example.bankapp.repository.common.models.Result
 import kotlinx.coroutines.launch
 
 class EnrollAccountViewModel : ViewModel() {
-    val repository: EnrolledAccountRepository = EnrolledAccountRepository()
+    val repository: EnrollAccountRepository = EnrollAccountRepository()
 
     val model: MutableLiveData<RegisterAccountForm> by lazy {
         MutableLiveData<RegisterAccountForm>(RegisterAccountForm())
@@ -25,7 +25,7 @@ class EnrollAccountViewModel : ViewModel() {
         MutableLiveData<String>("")
     }
 
-    private fun validateEnrollAccountForm(number: String): RegisterAccountForm {
+    private fun validateEnrollAccountForm(number: String, name: String): RegisterAccountForm {
         val newFormState = RegisterAccountForm()
         if (number.length < 11) {
             newFormState.isValidNumber = false
@@ -34,6 +34,14 @@ class EnrollAccountViewModel : ViewModel() {
             newFormState.isValidNumber = true
             newFormState.errorMessageNumber = ""
         }
+
+        if (name.trim().length < 3) {
+            newFormState.isValidName = false
+            newFormState.errorMessageName = "Nombre descriptivo no válido"
+        } else {
+            newFormState.isValidName = true
+            newFormState.errorMessageName = ""
+        }
         return newFormState
     }
 
@@ -41,10 +49,10 @@ class EnrollAccountViewModel : ViewModel() {
         if (accountType == SAVING_ES) SAVING else CURRENT
 
     fun enrollAccount(accountNumber: String, name: String, accountType: String) {
-        val newFormState = validateEnrollAccountForm(accountNumber)
+        val newFormState = validateEnrollAccountForm(accountNumber, name)
         enrolledAccountResponse.postValue("")
 
-        if (newFormState.isValidNumber) {
+        if (newFormState.isValid()) {
             newFormState.isLoading = true
             viewModelScope.launch {
                 when (val result = repository.enrollAccount(

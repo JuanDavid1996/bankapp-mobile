@@ -28,7 +28,7 @@ class EnrollAccountActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register_account)
+        setContentView(R.layout.activity_enroll_account)
         setUpViewReferences()
         setUpViewActions()
         listenViewModelUpdates()
@@ -48,6 +48,7 @@ class EnrollAccountActivity : AppCompatActivity() {
             R.array.account_types,
             android.R.layout.simple_spinner_dropdown_item
         )
+        accountTypesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         accountTypes.adapter = accountTypesAdapter
     }
@@ -56,7 +57,7 @@ class EnrollAccountActivity : AppCompatActivity() {
         create.setOnClickListener {
             model.enrollAccount(
                 accountNumber = accountNumber.text.toString(),
-                name = accountNumber.text.toString(),
+                name = name.text.toString(),
                 accountType = accountTypes.selectedItem.toString(),
             )
         }
@@ -68,6 +69,12 @@ class EnrollAccountActivity : AppCompatActivity() {
                 accountNumberLayout.error = null
             } else {
                 accountNumberLayout.error = it.errorMessageNumber
+            }
+
+            if (it.isValidName) {
+                nameLayout.error = null
+            } else {
+                nameLayout.error = it.errorMessageNumber
             }
 
             loading.visibility = if (it.isLoading) View.VISIBLE else View.GONE

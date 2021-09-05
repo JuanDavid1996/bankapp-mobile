@@ -8,7 +8,7 @@ import com.example.bankapp.repository.bank.models.Account
 
 @Dao
 interface AccountDao {
-    @Query("SELECT * FROM account")
+    @Query("SELECT * FROM Account")
     fun getAccounts(): List<Account>
 
     @Insert
@@ -16,4 +16,7 @@ interface AccountDao {
 
     @Delete
     fun delete(account: Account)
+
+    @Query("SELECT * FROM Account WHERE number = :number")
+    fun getAccountByAccountNumber(number: String): Account
 }

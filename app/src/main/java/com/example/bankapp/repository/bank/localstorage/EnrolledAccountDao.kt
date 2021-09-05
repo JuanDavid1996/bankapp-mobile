@@ -16,4 +16,7 @@ interface EnrolledAccountDao {
 
     @Delete
     fun delete(vararg enrolledAccounts: EnrolledAccount)
+
+    @Query("SELECT * FROM EnrolledAccount WHERE _id = :id LIMIT 1")
+    fun findById(id: String): EnrolledAccount
 }

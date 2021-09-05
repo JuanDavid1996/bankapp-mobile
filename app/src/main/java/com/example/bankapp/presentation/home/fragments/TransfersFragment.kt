@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.bankapp.R
+import com.example.bankapp.contants.ViewRouterParams
 import com.example.bankapp.presentation.home.EnrollAccountActivity
+import com.example.bankapp.presentation.home.EnrolledAccountsAccountActivity
 import com.example.bankapp.presentation.home.viewModels.TransfersViewModel
 
 class TransfersFragment : Fragment() {
@@ -22,6 +24,7 @@ class TransfersFragment : Fragment() {
     private lateinit var registeredAccount: TextView
     private lateinit var noRegisteredAccount: TextView
     private lateinit var registerAccount: TextView
+    private lateinit var enrolledAccounts: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,16 +44,23 @@ class TransfersFragment : Fragment() {
         registeredAccount = view.findViewById(R.id.registeredAccount)
         noRegisteredAccount = view.findViewById(R.id.noRegisteredAccount)
         registerAccount = view.findViewById(R.id.registerAccount)
+        enrolledAccounts = view.findViewById(R.id.enrolledAccounts)
     }
 
     private fun setUpViewActions() {
-        registeredAccount.setOnClickListener {}
+        registeredAccount.setOnClickListener { toEnrolledAccounts(true) }
         noRegisteredAccount.setOnClickListener {}
-        registerAccount.setOnClickListener { toRegisterAccount() }
+        registerAccount.setOnClickListener { toEnrollAccount() }
+        enrolledAccounts.setOnClickListener { toEnrolledAccounts() }
     }
 
-    private fun toRegisterAccount() {
+    private fun toEnrollAccount() {
         startActivity(Intent(activity, EnrollAccountActivity::class.java))
     }
 
+    private fun toEnrolledAccounts(isTransfer: Boolean = false) {
+        val intent = Intent(activity, EnrolledAccountsAccountActivity::class.java)
+        intent.putExtra(ViewRouterParams.IS_TRANSFER, isTransfer)
+        startActivity(intent)
+    }
 }

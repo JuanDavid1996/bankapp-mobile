@@ -20,7 +20,7 @@ class AccountRepository {
             if (accounts.isEmpty() || refresh) {
                 val result = getAccountsFromCloud()
                 if (result is Result.Error) {
-                    return@withContext Result.Error(result.exception)
+                    return@withContext result
                 } else if (result is Result.Success) {
                     accounts = result.data
                     forceSaveAccountsInLocalStorage(accounts)
@@ -70,6 +70,12 @@ class AccountRepository {
             if (accounts.isNotEmpty()) {
                 accounts.forEach { db.accountDao().delete(it) }
             }
+        }
+    }
+
+    suspend fun getUserAccountByAccountNumber(origin: String): Account {
+        return withContext(Dispatchers.IO) {
+            return@withContext db.accountDao().getAccountByAccountNumber(origin)
         }
     }
 }
