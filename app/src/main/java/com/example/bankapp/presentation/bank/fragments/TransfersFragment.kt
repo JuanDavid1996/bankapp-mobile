@@ -1,19 +1,16 @@
 package com.example.bankapp.presentation.bank.fragments
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.bankapp.R
 import com.example.bankapp.contants.ViewRouterParams
-import com.example.bankapp.presentation.bank.TransferToNoEnrolledAccount
-import com.example.bankapp.presentation.bank.EnrollAccountActivity
-import com.example.bankapp.presentation.bank.EnrolledAccountsAccountActivity
-import com.example.bankapp.presentation.bank.GenerateTransferByQR
+import com.example.bankapp.presentation.bank.*
 import com.example.bankapp.presentation.bank.viewModels.TransfersViewModel
 
 class TransfersFragment : Fragment() {
@@ -28,7 +25,7 @@ class TransfersFragment : Fragment() {
     private lateinit var registerAccount: TextView
     private lateinit var enrolledAccounts: TextView
     private lateinit var receive: TextView
-    private lateinit var generate: TextView
+    private lateinit var send: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +47,7 @@ class TransfersFragment : Fragment() {
         registerAccount = view.findViewById(R.id.registerAccount)
         enrolledAccounts = view.findViewById(R.id.enrolledAccounts)
         receive = view.findViewById(R.id.receive)
-        generate = view.findViewById(R.id.generate)
+        send = view.findViewById(R.id.send)
     }
 
     private fun setUpViewActions() {
@@ -59,6 +56,7 @@ class TransfersFragment : Fragment() {
         registerAccount.setOnClickListener { toEnrollAccount() }
         enrolledAccounts.setOnClickListener { toEnrolledAccounts() }
         receive.setOnClickListener { toGenerateQR() }
+        send.setOnClickListener { toSendWithQR() }
     }
 
     private fun toEnrollAccount() {
@@ -78,5 +76,9 @@ class TransfersFragment : Fragment() {
 
     private fun toGenerateQR() {
         startActivity(Intent(activity, GenerateTransferByQR::class.java))
+    }
+
+    private fun toSendWithQR() {
+        startActivity(Intent(activity, TransferWithQR::class.java))
     }
 }

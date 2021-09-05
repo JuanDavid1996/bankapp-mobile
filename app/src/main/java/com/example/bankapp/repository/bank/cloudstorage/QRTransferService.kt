@@ -1,7 +1,7 @@
 package com.example.bankapp.repository.bank.cloudstorage
 
 import com.example.bankapp.repository.bank.models.QRTransferResponse
-import com.example.bankapp.repository.bank.models.EnrolledAccountResponse
+import com.example.bankapp.repository.bank.models.TransferResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -16,5 +16,6 @@ interface QRTransferService {
     suspend fun send(
         @HeaderMap headers: Map<String, String>,
         @Path("transfer_id") transferId: String,
-    ): Response<EnrolledAccountResponse>
+        @Body data: Map<String, String>
+    ): Response<TransferResponse>
 }
