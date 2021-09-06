@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.bankapp.R
 import com.example.bankapp.presentation.bank.viewModels.ProfileViewModel
 import com.example.bankapp.presentation.session.SignInActivity
+import com.google.android.material.textfield.TextInputEditText
 
 class ProfileFragment : Fragment() {
 
@@ -18,8 +19,11 @@ class ProfileFragment : Fragment() {
         fun newInstance() = ProfileFragment()
     }
 
-    private lateinit var viewModel: ProfileViewModel
+    private lateinit var model: ProfileViewModel
     private lateinit var logout: Button
+    private lateinit var firstName: TextInputEditText
+    private lateinit var lastName: TextInputEditText
+    private lateinit var username: TextInputEditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,25 +34,37 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        model = ViewModelProvider(this).get(ProfileViewModel::class.java)
         setUpViewReferences(view)
         setUpButtonActions()
-        listenViewModelUpdates();
+        listenViewModelUpdates()
+        model.onCreate()
     }
 
     private fun setUpViewReferences(view: View) {
+        firstName = view.findViewById(R.id.firstName)
+        lastName = view.findViewById(R.id.lastName)
+        username = view.findViewById(R.id.username)
         logout = view.findViewById(R.id.logout)
     }
 
     private fun setUpButtonActions() {
         logout.setOnClickListener {
-            viewModel.logOut();
+            model.logOut();
         }
     }
 
     private fun listenViewModelUpdates() {
-        viewModel.onLogOut.observe(viewLifecycleOwner, {
+        model.onLogOut.observe(viewLifecycleOwner, {
             if (it) toSignIn()
+        })
+
+        model.user.observe(viewLifecycleOwner, {
+            if (it != null) {
+                firstName.setText(it.firstName)
+                lastName.setText(it.lastName)
+                username.setText(it.username)
+            }
         })
     }
 

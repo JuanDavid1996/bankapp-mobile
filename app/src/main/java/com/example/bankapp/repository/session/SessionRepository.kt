@@ -91,4 +91,10 @@ class SessionRepository {
             return@safeRequest Result.Error(Exception("Request fail"))
         }
     }
+
+    suspend fun getCurrentUser(): User {
+        return withContext(Dispatchers.IO) {
+            return@withContext db.userDao().getCurrentUser()!!
+        }
+    }
 }
