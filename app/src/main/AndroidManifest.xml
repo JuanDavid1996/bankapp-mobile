@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.bankapp">
 
+    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
     <application
         android:name=".BankApp"
@@ -19,23 +19,33 @@
         android:theme="@style/Theme.BankApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.bank.EconomicMovementsActivity"
+            android:exported="true"
+            android:label="@string/economic_movements" />
+        <activity
             android:name=".presentation.bank.TransferWithQR"
-            android:exported="true" />
+            android:exported="true"
+            android:label="@string/transfer_with_qr" />
         <activity
             android:name=".presentation.bank.GenerateTransferByQR"
-            android:exported="true" />
+            android:exported="true"
+            android:label="@string/receiver_by_qr" />
         <activity
             android:name=".presentation.bank.TransferToNoEnrolledAccount"
-            android:exported="true" />
+            android:exported="true"
+            android:label="@string/transfer_no_enrolled_accounts" />
         <activity
             android:name=".presentation.bank.TransferTo"
-            android:exported="true" />
+            android:exported="true"
+            android:label="@string/transfer_to" />
         <activity
             android:name=".presentation.bank.EnrolledAccountsAccountActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="@string/enrolled_accounts" />
         <activity
             android:name=".presentation.bank.EnrollAccountActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="@string/enroll_account" />
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true">
@@ -51,11 +61,12 @@
             android:label="@string/title_activity_home" />
         <activity
             android:name=".presentation.session.SignUpActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="@string/sign_up" />
         <activity
             android:name=".presentation.session.SignInActivity"
-            android:exported="true" />
-
+            android:exported="true"
+            android:label="@string/sign_in" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"

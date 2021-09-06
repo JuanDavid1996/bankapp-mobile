@@ -1,5 +1,6 @@
 package com.example.bankapp.presentation.bank.fragments
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.bankapp.R
+import com.example.bankapp.contants.ViewRouterParams
+import com.example.bankapp.presentation.bank.EconomicMovementsActivity
 import com.example.bankapp.presentation.bank.adapters.AccountAdapter
 import com.example.bankapp.presentation.bank.viewModels.AccountsViewModel
 import com.example.bankapp.repository.bank.models.Account
@@ -40,6 +43,11 @@ class AccountsFragment : Fragment() {
         setUpEvents()
         listenViewModelChanges()
         fetchAccounts()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        fetchAccounts(true)
     }
 
     private fun setUpViewReferences(view: View) {
@@ -79,5 +87,8 @@ class AccountsFragment : Fragment() {
 
     private fun onClickAccount(account: Account) {
         println("Clicked ${account._id}")
+        val intent = Intent(activity, EconomicMovementsActivity::class.java)
+        intent.putExtra(ViewRouterParams.ACCOUNT_ID, account._id)
+        startActivity(intent)
     }
 }

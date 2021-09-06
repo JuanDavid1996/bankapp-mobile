@@ -9,6 +9,10 @@ fun Double.toCurrency(): String {
     return "$ ".plus(NumberFormat.getNumberInstance(Locale.US).format(this))
 }
 
+fun String.toCurrency(): String {
+    return this.toDouble().toCurrency()
+}
+
 fun String.isJson(): Boolean {
     return try {
         JSONObject(this)

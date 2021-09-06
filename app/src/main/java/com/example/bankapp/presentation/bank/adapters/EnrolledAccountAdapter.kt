@@ -33,7 +33,7 @@ class EnrolledAccountAdapter(
         val context: Context = parent.context
         val inflater = LayoutInflater.from(context)
 
-        val view: View = inflater.inflate(R.layout.enrolled_account_item, parent, false);
+        val view: View = inflater.inflate(R.layout.enrolled_account_item, parent, false)
         return EnrolledAccountHolder(view)
     }
 
@@ -47,18 +47,18 @@ class EnrolledAccountAdapter(
 
         if (lastIndexSelected == position) {
             holder.itemView.background =
-                ColorDrawable(ContextCompat.getColor(holder.itemView.context, R.color.teal_200));
+                ColorDrawable(ContextCompat.getColor(holder.itemView.context, R.color.teal_200))
         } else {
             holder.itemView.background = null
         }
     }
 
     private fun onItemClick(position: Int, enrolledAccount: EnrolledAccount) {
-        if (selectable) toggleItem(position, enrolledAccount)
+        if (selectable) toggleItem(position)
         onClick?.let { it(enrolledAccount, lastIndexSelected != RecyclerView.NO_POSITION) }
     }
 
-    private fun toggleItem(position: Int, enrolledAccount: EnrolledAccount) {
+    private fun toggleItem(position: Int) {
         val tempLastItemSelected = lastIndexSelected
         lastIndexSelected = if (lastIndexSelected == position) {
             RecyclerView.NO_POSITION

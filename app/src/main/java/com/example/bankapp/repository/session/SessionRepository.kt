@@ -2,7 +2,7 @@ package com.example.bankapp.repository.session
 
 import com.example.bankapp.network.utils.NormalizeError
 import com.example.bankapp.network.utils.SafeRequest
-import com.example.bankapp.repository.common.localstorage.SetUpDb.Companion.db
+import com.example.bankapp.repository.common.SetUpDb.Companion.db
 import com.example.bankapp.repository.session.models.SignInResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

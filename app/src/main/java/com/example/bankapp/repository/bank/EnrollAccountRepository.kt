@@ -5,7 +5,7 @@ import com.example.bankapp.repository.bank.models.EnrollAccountResponse
 import com.example.bankapp.repository.bank.models.EnrolledAccount
 import com.example.bankapp.network.utils.NormalizeError
 import com.example.bankapp.network.utils.SafeRequest
-import com.example.bankapp.repository.common.localstorage.SetUpDb.Companion.db
+import com.example.bankapp.repository.common.SetUpDb.Companion.db
 import com.example.bankapp.network.models.Result
 import com.example.bankapp.repository.session.SessionRepository
 import kotlinx.coroutines.Dispatchers

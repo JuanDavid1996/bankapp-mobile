@@ -4,7 +4,7 @@ import com.example.bankapp.repository.bank.cloudstorage.AccountProvider
 import com.example.bankapp.repository.bank.models.Account
 import com.example.bankapp.repository.bank.models.AccountResponse
 import com.example.bankapp.network.utils.SafeRequest
-import com.example.bankapp.repository.common.localstorage.SetUpDb.Companion.db
+import com.example.bankapp.repository.common.SetUpDb.Companion.db
 import com.example.bankapp.network.models.Result
 import com.example.bankapp.repository.session.SessionRepository
 import kotlinx.coroutines.Dispatchers
@@ -77,6 +77,12 @@ class AccountRepository {
     suspend fun getUserAccountByAccountNumber(origin: String): Account {
         return withContext(Dispatchers.IO) {
             return@withContext db.accountDao().getAccountByAccountNumber(origin)
+        }
+    }
+
+    suspend fun getAccountById(accountId: String): Account {
+        return withContext(Dispatchers.IO) {
+            return@withContext db.accountDao().getAccountById(accountId)
         }
     }
 }

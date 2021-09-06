@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">BankApp</string>
     <string name="title_activity_home">BankApp</string>
+    <string name="economic_movements">Movimientos económicos</string>
+    <string name="transfer_with_qr">Tranferir por qr</string>
+    <string name="receiver_by_qr">Recibir por qr</string>
+    <string name="enrolled_accounts">Cuentas inscritas</string>
+    <string name="transfer_to">Transferir a</string>
+    <string name="transfer_no_enrolled_accounts">Cunetas no inscritas</string>
+    <string name="enroll_account">Inscribir cuenta</string>
+    <string name="sign_up">Registro</string>
+    <string name="sign_in">Inicio de sesión</string>
 
     <string-array name="account_types">
         <item>Ahorro</item>

@@ -7,6 +7,7 @@
         <entry key="../../../../media/juan/New Volume/Sdk/platforms/android-30/data/res/layout/simple_spinner_dropdown_item.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/account_item.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/accounts_fragment.xml" value="0.41458333333333336" />
+        <entry key="app/src/main/res/layout/activity_economic_movements.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/activity_enroll_account.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/activity_generate_transfer_by_qr.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.25" />
@@ -19,6 +20,7 @@
         <entry key="app/src/main/res/layout/activity_transfer_to_no_enrolled_account.xml" value="0.3546875" />
         <entry key="app/src/main/res/layout/activity_transfer_with_qr.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/enrolled_account_item.xml" value="0.3697916666666667" />
+        <entry key="app/src/main/res/layout/movement_item.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/profile_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/transfers_fragment.xml" value="0.5" />
         <entry key="app/src/main/res/menu/account_types.xml" value="0.3697916666666667" />
