@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 open class AppProvider {
     companion object {
         var retrofit: Retrofit? = null
-        const val BASE_URL = "http://192.168.100.72:3000/"
+        const val BASE_URL = "http://164.90.158.112:3000/"
     }
 
     fun getRetrofit(): Retrofit {
